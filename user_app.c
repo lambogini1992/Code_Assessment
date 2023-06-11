@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     {
         return -1;
     }
+    p_rbuf = (uint8_t *)malloc(str_size + 1);
     read_device_file(p_rbuf, str_size);
     printf("Invert String output: %s\r\n", p_rbuf);
     free(p_rbuf);
