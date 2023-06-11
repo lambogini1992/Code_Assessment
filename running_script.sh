@@ -14,11 +14,15 @@ make all
 #intall Linux kernel
 sudo insmod kernel_module.ko
 
+#change permission
+sudo chmod 777 /dev/invert_dev
+
+#clear terminal screen
+clear
+
 #build application
 gcc user_app.c -o user_app
 
-#Clear Terminal
-clear
 #sleep 1 second
 sleep 1
 

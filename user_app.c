@@ -7,6 +7,8 @@
 
 static int  read_device_file(uint8_t *str_buf, size_t buf_size);
 static int  write_device_file(uint8_t *str_buf, size_t buf_size);
+static char *read_data_file(char *filename, size_t *fl_size);
+static void data_file_freebuf(char *buf);
 
 int main(int argc, char *argv[])
 {
@@ -16,26 +18,16 @@ int main(int argc, char *argv[])
     int ret = 0;
     if(argc < 2)
     {
-        printf("Please input string with command format:\r\n");
-        printf("\t\t user_app <STRING_INPUT>");
+        printf("Please input file path with command format:\r\n");
+        printf("\t\t user_app <FILE_PATH>");
         return -1;
     }
     
-    for(int idx = 1; idx < argc; idx++)
+    input_str = read_data_file(argv[1], &str_size);
+    if(NULL == input_str)
     {
-        //For space character
-        str_size += (strlen((char *)argv[idx]) + 1);
+        return -1;
     }
-
-    input_str = (uint8_t *)malloc(str_size + 1);
-    input_str[0] = 0;
-    for(int idx = 1; idx < argc; idx++)
-    {
-        sprintf(input_str,"%s %s",input_str,argv[idx]);
-    }
-
-
-    p_rbuf   = (uint8_t *)malloc(str_size + 1);
 
     if(-1 == write_device_file(input_str, str_size))
     {
@@ -48,7 +40,56 @@ int main(int argc, char *argv[])
     return 0;
 }
 
+static void data_file_freebuf(char *buf)
+{
+    if(buf)
+    {
+        free(buf);
+    }
+}
 
+static char *read_data_file(char *filename, size_t *fl_size)
+{
+    FILE *p_file = NULL;
+    char *r_buf  = NULL;
+    size_t file_size = 0;
+    int ret      = 0;
+
+    p_file = fopen(filename, "r");
+    if(NULL == p_file)
+    {
+        printf("Failed to open file\r\n");
+        return NULL;
+    }
+
+    fseek(p_file, 0, SEEK_END);
+    file_size = ftell(p_file);
+    fseek(p_file, 0, SEEK_SET);
+    
+    if(0 == file_size)
+    {
+        printf("File size is O\r\n");
+        return NULL;
+    }
+
+    r_buf = (char *)malloc(file_size);
+
+    ret = fread(r_buf, sizeof(uint8_t), file_size, p_file);
+    if(ret != file_size)
+    {
+        printf("Failed to read file\r\n");
+        free(r_buf);
+        r_buf = NULL;
+    }
+    else
+    {
+        *fl_size = file_size;
+    }
+
+    fclose(p_file);
+    
+    return r_buf;
+}
 
 static int  read_device_file(uint8_t *str_buf, size_t buf_size)
 {
