@@ -78,17 +78,15 @@ static ssize_t dev_read(struct file*filep, char __user *buf, size_t len, loff_t 
 		return -EFAULT;
 	}
 
-	// pr_info("invert_buf: %s \n", buf_invert.invert_buf);
+
 	ssize_t len_invert = (ssize_t)strlen(buf_invert.invert_buf);
 	if(copy_to_user(buf, buf_invert.invert_buf, buf_invert.buf_size))
 	{
 		return -EFAULT;
 	}
-	pr_info("read done\n");
 	kfree(buf_invert.invert_buf);
 	buf_invert.invert_buf = NULL;
 	buf_invert.buf_size   = 0;
-	pr_info("read done\n");
 	return len_invert;
 }
 
@@ -132,7 +130,8 @@ static int __init exam_init(void)
 		goto failed_create_class;
 	}
 	
-	if(IS_ERR(device_create(kern_dev_info.class, NULL, kern_dev_info.dev, NULL, "invert_dev")))
+	ret = (int)device_create(kern_dev_info.class, NULL, kern_dev_info.dev, NULL, "invert_dev");
+	if(ret <= 0)
 	{
 		pr_err("Failed to create device\r\n");
 		goto failed_create_device;

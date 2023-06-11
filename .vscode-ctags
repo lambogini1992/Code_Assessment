@@ -1,0 +1,27 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/pta/Documents/github/Code_Assessment/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+DEVICE_FILE_NAME	kernel_module.c	/^#define DEVICE_FILE_NAME	/;"	d	file:
+_buffer_invert_	kernel_module.c	/^struct _buffer_invert_$/;"	s	file:
+all	Makefile	/^all:$/;"	t
+buf_invert	kernel_module.c	/^}buf_invert;$/;"	v	typeref:struct:_buffer_invert_
+buf_size	kernel_module.c	/^	size_t  buf_size;$/;"	m	struct:_buffer_invert_	typeref:typename:size_t	file:
+clean	Makefile	/^clean:$/;"	t
+dev_close	kernel_module.c	/^static int dev_close(struct inode *inodep, struct file *filep)$/;"	f	typeref:typename:int	file:
+dev_invert_string	kernel_module.c	/^static int dev_invert_string(const char *src_buff, size_t str_len)$/;"	f	typeref:typename:int	file:
+dev_open	kernel_module.c	/^static int dev_open(struct inode *inodep, struct file *filep)$/;"	f	typeref:typename:int	file:
+dev_read	kernel_module.c	/^static ssize_t dev_read(struct file*filep, char __user *buf, size_t len, loff_t *offset)$/;"	f	typeref:typename:ssize_t	file:
+dev_write	kernel_module.c	/^static ssize_t dev_write(struct file*filep, const char __user *buf, size_t len, loff_t *offset)$/;"	f	typeref:typename:ssize_t	file:
+exam_exit	kernel_module.c	/^static void __exit exam_exit(void)$/;"	f	typeref:typename:void __exit	file:
+exam_init	kernel_module.c	/^static int __init exam_init(void)$/;"	f	typeref:typename:int __init	file:
+fops	kernel_module.c	/^static struct file_operations fops = {$/;"	v	typeref:struct:file_operations	file:
+invert_buf	kernel_module.c	/^	char 	*invert_buf;$/;"	m	struct:_buffer_invert_	typeref:typename:char *	file:
+obj-m	Makefile	/^obj-m = kernel_module.o$/;"	m

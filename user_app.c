@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
         return -1;
     }
     read_device_file(p_rbuf, str_size);
-    printf("String: %s\r\n", p_rbuf);
+    printf("Invert String output: %s\r\n", p_rbuf);
     free(p_rbuf);
     free(input_str);
     return 0;
